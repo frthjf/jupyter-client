@@ -41,7 +41,7 @@ export class JupyterBackend {
     async connectToBinder(repo, ref='master', binder = 'https://mybinder.org', eventCallback = (e) => {}) {
       console.log("Connecting to binder");
       const mybinder = await launchBinder(repo, ref, binder, eventCallback)
-     
+
       if (mybinder.phase != 'ready') {
         console.log('Could not launch binder instance')
         console.log(mybinder)
@@ -59,7 +59,7 @@ export class JupyterBackend {
       });
 
       this.kernelManager = new KernelManager({ serverSettings: serverSettings });
-      
+
       await this.kernelManager.ready
       // find or create kernel
       let kernel;
@@ -77,4 +77,3 @@ export class JupyterBackend {
       this.connection = this.kernelManager.connectTo({ model: kernel });
     }
   }
-  
