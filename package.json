@@ -1,0 +1,27 @@
+{
+  "name": "@frthjf/jupyter-client",
+  "version": "1.0.0",
+  "description": "A high-level library to manage and execute code against jupyter backends",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frthjf/jupyter-client.git"
+  },
+  "keywords": [
+    "jupyter",
+    "client"
+  ],
+  "author": "Frithjof Gressmann",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/frthjf/jupyter-client/issues"
+  },
+  "homepage": "https://github.com/frthjf/jupyter-client#readme",
+  "dependencies": {
+    "@jupyterlab/services": "^6.4.4",
+    "@stardazed/streams-polyfill": "^2.4.0"
+  }
+}
