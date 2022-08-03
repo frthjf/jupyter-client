@@ -2,9 +2,18 @@
   "name": "@frthjf/jupyter-client",
   "version": "1.0.0",
   "description": "A high-level library to manage and execute code against jupyter backends",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "standard | snazzy",
+    "lint:fix": "standard --fix | snazzy",
+    "lint:test": "npm run lint && npm test",
+    "test": "mocha --require @babel/register \"tests/**/*.tests.js\"",
+    "test:watch": "npm test -- --watch",
+    "build": "npm run build:merge && babel ./dist/index.js --out-dir ./dist --source-maps",
+    "build:merge": "rm -rf ./dist/** && rollup lib/index.js --file dist/index.js --format 'cjs'",
+    "build:min": "minify ./dist/index.js --out-file ./dist/index.min.js --mangle.keepFnName --mangle.keepClassName --",
+    "build:all": "npm run docs && npm run build && npm run build:min",
+    "build:ci": "npm run lint && npm run test && npm run build:all"
   },
   "repository": {
     "type": "git",
@@ -20,8 +29,33 @@
     "url": "https://github.com/frthjf/jupyter-client/issues"
   },
   "homepage": "https://github.com/frthjf/jupyter-client#readme",
+  "babel": {
+    "presets": [
+      "@babel/env"
+    ]
+  },
+  "standard": {
+    "ignore": [
+      "docs/",
+      "node_modules/",
+      "dist/"
+    ]
+  },
   "dependencies": {
+    "@jupyterlab/coreutils": "^5.4.4",
     "@jupyterlab/services": "^6.4.4",
     "@stardazed/streams-polyfill": "^2.4.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.18.10",
+    "@babel/core": "^7.18.10",
+    "@babel/preset-env": "^7.18.10",
+    "@babel/register": "^7.18.9",
+    "babel-minify": "^0.5.2",
+    "chai": "^4.3.6",
+    "mocha": "^10.0.0",
+    "rollup": "^2.77.2",
+    "snazzy": "^9.0.0",
+    "standard": "^17.0.0"
   }
 }
